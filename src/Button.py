@@ -1,5 +1,5 @@
 import pygame
-
+#AhDesu
 class Button():
     def __init__(self, x, y, image):
         self.image = image
@@ -12,5 +12,11 @@ class Button():
         pos = pygame.mouse.get_pos()
         if self.rect.collidepoint(pos):
             if pygame.mouse.get_pressed()[0] == 1:
-                print(f"Yo {x}")
+                print(f"Yo")
         return action
+    
+    # Clickable
+    # animation
+    # img
+    # load image in class
+    # 

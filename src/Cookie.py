@@ -1,2 +1,9 @@
+import pygame
+# Lchappart
+
 class Cookie:
-    pass
+    # _score = 0
+    # cookie / sec = 0
+    # retrait / ajout
+    # multiplicateur = 1
+    # 
