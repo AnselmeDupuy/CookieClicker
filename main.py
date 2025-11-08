@@ -12,17 +12,20 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Cookie Cliker (pour l'instant)")
 
-start = pygame.image.load("assets/start_btn.png").convert_alpha()
 stop = pygame.image.load("assets/exit_btn.png").convert_alpha()
 
-start_button = Button((WINDOW_WIDTH / 2) - (290 / 2), 450, start)
-stop_button = Button((WINDOW_WIDTH / 2) - (250 / 2), 500 , stop)
+start_button = Button((WINDOW_WIDTH / 2) - (290 / 2), 250, "assets/start_btn.png")
+stop_button = Button((WINDOW_WIDTH / 2) - (250 / 2), 375 , "assets/exit_btn.png")
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if start_button.handle_event(event):
+            print(f"Start button clicked")
+        if stop_button.handle_event(event):
+            print(f"Exit button clicked")
 
     screen.fill((50,50,50))
 

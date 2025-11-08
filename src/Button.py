@@ -1,21 +1,23 @@
 import pygame
 #AhDesu
 class Button():
-    def __init__(self, x, y, image):
-        self.image = image
+    def __init__(self, x_pos, y_pos, image_path):
+        self.image = pygame.image.load(image_path).convert_alpha()
         self.rect = self.image.get_rect()
-        self.rect.topleft = (x,y)
+        self.rect.topleft = (x_pos,y_pos)
     
+    # Dessine le bouton au coordonées à l'initialisation
     def draw(self, screen):
-        action = False
         screen.blit(self.image, (self.rect.x, self.rect.y))
+
+    # Rend le bouton cliquable (clique gauche uniquement)
+    def handle_event(self, event):
         pos = pygame.mouse.get_pos()
-        if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0] == 1:
-                print(f"Yo")
-        return action
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                if self.rect.collidepoint(event.pos):
+                    return True
     
-    # Clickable
     # animation
     # img
     # load image in class
