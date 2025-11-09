@@ -1,6 +1,5 @@
 import pygame
 from src.Button import Button
-#AhDesu
 #initialise le menu et lui donne l'état du jeu
 class Menu:
     def __init__(self):
