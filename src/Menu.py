@@ -10,6 +10,6 @@ class Menu:
         for button in button_list:
             button.draw(screen)        
 
-    # import Button
+
     # import save
     # Start / exit / newgame / load
