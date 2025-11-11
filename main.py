@@ -1,3 +1,16 @@
+import importlib
+import subprocess
+import sys
+
+package_name = "pygame"
+
+try:
+    importlib.import_module(package_name)
+except ImportError:
+    print(f"{package_name} not found. Installing...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
+    print("Installation complete!")
+
 import pygame
 from src.Button import Button
 from src.Bonus import Bonus
