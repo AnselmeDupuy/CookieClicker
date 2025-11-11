@@ -2,12 +2,13 @@ import pygame
 from src.Cookie import Cookie
 
 class Buildings:
-    def __init__(self):
-        self.multiplicator = None
-        self.bonus_per_click = None
-        self.price = None
-        self.price_multiplicator = None
-        self.bonuses_multiplicator = None
+    def __init__(self, name : str, multiplicator : float, bonus_per_click : int, price : int, price_multiplicator : float, bonuses_multiplicator : float):
+        self.name = name
+        self.multiplicator = multiplicator
+        self.bonus_per_click = bonus_per_click
+        self.price = price
+        self.price_multiplicator = price_multiplicator
+        self.bonuses_multiplicator = bonuses_multiplicator
 
     def buy(self, cookie: Cookie):
         if cookie.score >= self.price:
@@ -19,3 +20,6 @@ class Buildings:
             self.bonus_per_click *= self.bonuses_multiplicator
             return True
         return False
+    
+    def get_price(self):
+        return self.price
