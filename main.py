@@ -7,9 +7,14 @@ package_name = "pygame"
 try:
     importlib.import_module(package_name)
 except ImportError:
-    print(f"{package_name} not found. Installing...")
+    print(f"pygame not found, do you wish to install it now? (y/n)")
+    choice = input().lower()
+    if choice != 'y':
+        print("Cannot proceed without installing pygame. Exiting.")
+        sys.exit(1)
+    print(f"Installing {package_name}...")
     subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
-    print("Installation complete!")
+    print("Installation complete! \nGame starting...")
 
 import pygame
 from src.Button import Button
