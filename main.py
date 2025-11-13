@@ -19,15 +19,12 @@ except ImportError:
 import pygame
 from src.Button import Button
 from src.Bonus import Bonus
-from src.Buildings import Buildings
+from src.Buildings import Bakery, Farm, FlourFactory, Oven
 from src.Cookie import Cookie
 from src.Menu import Menu
 from src.Save import Save
-import sys
 
 pygame.init()
-
-
 
 clock = pygame.time.Clock()
 
@@ -35,7 +32,6 @@ clock = pygame.time.Clock()
 
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 900
-
 
 # Initialize screen and window 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -51,7 +47,7 @@ bg = pygame.image.load("assets/bg.png").convert_alpha()
 bg_rect = bg.get_rect()
 cookie_button = Button((WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 3), "assets/cookie3.png")
 
-building_1 = Buildings("test", 1, 2, 10, 1.3, 1)
+building_1 = Bakery()
 building_1_button = Button((WINDOW_WIDTH - 250), ( 125), "assets/golden_cookie.png")
 
 
