@@ -1,6 +1,6 @@
 import pygame
 from src.Cookie import Cookie
-import Buildings
+from .Buildings import Buildings
 
 class Oven(Buildings):
     def __init__(self):

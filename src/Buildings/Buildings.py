@@ -23,3 +23,6 @@ class Buildings:
     
     def get_price(self):
         return self.price
+    
+    def get_name(self):
+        return self.name

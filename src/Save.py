@@ -8,7 +8,7 @@ class Save:
     def __init__(self):
         pass
 
-    def save(self, cookie: Cookie, buildings: list[Buildings], bonuses: list[Bonus]):
+    def save(self, cookie: Cookie, buildings: list[Buildings], bonuses: list[Bonus] = []):
         data = {
             'timestamp': int(time.time()),
             'cookie': {
