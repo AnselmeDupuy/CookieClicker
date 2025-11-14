@@ -184,7 +184,7 @@ while True:
             text_rect = creator1_text.get_rect(center=(WINDOW_WIDTH/2, 250))
             screen.blit(creator1_text, text_rect)
 
-            creator2_text = credits_font.render("Ansleme Dupuy", True, (255, 255, 255))
+            creator2_text = credits_font.render("Anselme Dupuy", True, (255, 255, 255))
             text_rect = creator2_text.get_rect(center=(WINDOW_WIDTH/2, 300))
             screen.blit(creator2_text, text_rect)
 
