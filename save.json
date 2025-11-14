@@ -1,0 +1,44 @@
+{
+    "timestamp": 1763112232,
+    "cookie": {
+        "score": 13,
+        "cookies_per_second": 0,
+        "cookies_per_click": 5,
+        "multiplicator": 1.5
+    },
+    "buildings": [
+        {
+            "name": "FlourFactory",
+            "multiplicator": 5.1,
+            "bonus_per_click": 13.6,
+            "price": 125.0,
+            "price_multiplicator": 2.5,
+            "bonuses_multiplicator": 3.4
+        },
+        {
+            "name": "Farm",
+            "multiplicator": 2,
+            "bonus_per_click": 10,
+            "price": 250,
+            "price_multiplicator": 6,
+            "bonuses_multiplicator": 5
+        },
+        {
+            "name": "Oven",
+            "multiplicator": 4,
+            "bonus_per_click": 50,
+            "price": 780,
+            "price_multiplicator": 8,
+            "bonuses_multiplicator": 6
+        },
+        {
+            "name": "Bakery",
+            "multiplicator": 8,
+            "bonus_per_click": 100,
+            "price": 2500,
+            "price_multiplicator": 9,
+            "bonuses_multiplicator": 8
+        }
+    ],
+    "bonuses": []
+}

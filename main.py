@@ -24,6 +24,7 @@ from src.Cookie import Cookie
 from src.Menu import Menu
 from src.Save import Save
 from src.Stylesheet import Stylesheet
+import math
 
 pygame.init()
 
@@ -99,7 +100,6 @@ buildings.append(farm)
 buildings.append(oven)
 buildings.append(bakery)
 
-
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -108,56 +108,54 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 game_state = "menu"
-
+        # All if while in game menu
         if game_state == "menu":
-            if start_button.handle_event(event) and game_state == "menu":
+            screen.fill((52,78,91))
+            menu.display_menu(screen, buttons)
+            if load_button.handle_event(event):
+                save.load(cookie, buildings)
+                screen.blit(font.render(f"GAME LOADED!", True, (255, 255, 255)),(((WINDOW_WIDTH / 2) - 100), (10)))
+            if start_button.handle_event(event):
                 print(f"Start button clicked")
                 game_state = "playing"
-            if stop_button.handle_event(event) and game_state == "menu":
+            if stop_button.handle_event(event):
                 print(f"Exit button clicked in menu")
                 pygame.quit()
                 sys.exit()
-            if save_button.handle_event(event) and game_state == "menu":
+            if save_button.handle_event(event):
                 save.save(cookie, buildings)
-
+                screen.blit(font.render(f"GAME SAVED!", True, (255, 255, 255)),(((WINDOW_WIDTH / 2) - 100), (10)))
+        # All if while playing the game
         if game_state == "playing":
-            if Bakery_button.handle_event(event) and game_state == "playing":
+            screen.fill((52,78,91))
+            
+            screen.blit(font.render(f"Score: {cookie.get_score()}", True, (255, 255, 255)),(10,10))
+            screen.blit(font.render(f"Price for {bakery.get_name()}: {bakery.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (64)))
+            screen.blit(font.render(f"Price for {farm.get_name()}: {farm.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (192)))
+            screen.blit(font.render(f"Price for {oven.get_name()}: {oven.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (320)))
+            screen.blit(font.render(f"Price for {flour_factory.get_name()}: {flour_factory.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (448)))
+
+            cookie_button.draw(screen)
+            Bakery_button.draw(screen)
+            farm_button.draw(screen)
+            oven_button.draw(screen)
+            flour_factory_button.draw(screen)
+            if Bakery_button.handle_event(event):
                 if cookie.get_score() >= bakery.get_price():
                     bakery.buy(cookie)
-            if farm_button.handle_event(event) and game_state == "playing":
+            if farm_button.handle_event(event):
                 if cookie.get_score() >= farm.get_price():
                     farm.buy(cookie)
-            if oven_button.handle_event(event) and game_state == "playing":
+            if oven_button.handle_event(event):
                 if cookie.get_score() >= oven.get_price():
                     oven.buy(cookie)
-            if flour_factory_button.handle_event(event) and game_state == "playing":
+            if flour_factory_button.handle_event(event):
                 if cookie.get_score() >= flour_factory.get_price():
                     flour_factory.buy(cookie)
-            if cookie_button.handle_event(event) and game_state == "playing":
+            if cookie_button.handle_event(event):
                 print(f"clicked cookie")
                 cookie.add()
 
-
-        
-
-    if game_state == "playing":
-        screen.fill((50,50,50))
-        
-        screen.blit(font.render(f"Score: {cookie.get_score()}", True, (255, 255, 255)),(10,10))
-        screen.blit(font.render(f"Price for {bakery.get_name()}: {bakery.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (64)))
-        screen.blit(font.render(f"Price for {farm.get_name()}: {farm.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (192)))
-        screen.blit(font.render(f"Price for {oven.get_name()}: {oven.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (320)))
-        screen.blit(font.render(f"Price for {flour_factory.get_name()}: {flour_factory.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (448)))
-
-        cookie_button.draw(screen)
-        Bakery_button.draw(screen)
-        farm_button.draw(screen)
-        oven_button.draw(screen)
-        flour_factory_button.draw(screen)
-
-    elif game_state == "menu":
-        screen.fill((52,78,91))
-        menu.display_menu(screen, buttons)
 
 
     pygame.display.flip()
