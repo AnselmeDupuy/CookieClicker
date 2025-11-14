@@ -55,6 +55,8 @@ stop_button = Button((WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2 ) + 175, "assets/exi
 
 cookie_button = Button((WINDOW_WIDTH / 2 - 256), (WINDOW_HEIGHT / 3), "assets/sprite_cookie.png", 0.9)
 
+credits_button = Button((WINDOW_WIDTH - 50), (WINDOW_HEIGHT - 30), "assets/credits_btn.png", 0.2)
+
 option_button = Button((WINDOW_WIDTH - 30), (30), "assets/option_btn.png", 0.2)
 
 
@@ -95,6 +97,7 @@ buttons.append(start_button)
 buttons.append(save_button)
 buttons.append(load_button)
 buttons.append(stop_button)
+buttons.append(credits_button)
 
 buildings.append(flour_factory)
 buildings.append(farm)
@@ -133,6 +136,9 @@ while True:
             if save_button.handle_event(event):
                 save.save(cookie, buildings)
                 screen.blit(font.render(f"GAME SAVED!", True, (255, 255, 255)),(((WINDOW_WIDTH / 2) - 100), (10)))
+            if credits_button.handle_event(event):
+                game_state = "credits"
+
         # All if while playing the game
         if game_state == "playing":
             screen.fill((52,78,91))
@@ -165,6 +171,27 @@ while True:
                     flour_factory.buy(cookie)
             if cookie_button.handle_event(event):
                 cookie.add()
+        if game_state == "credits":
+            screen.fill((52,78,91))
+            credits_title_font = pygame.font.Font(None, 74)
+            credits_text = credits_title_font.render("Credits", True, (255, 255, 255))
+            text_rect = credits_text.get_rect(center=(WINDOW_WIDTH/2, 150))
+            screen.blit(credits_text, text_rect)
+
+            credits_font = pygame.font.Font(None, 50)
+            
+            creator1_text = credits_font.render("Léo Chappart", True, (255, 255, 255))
+            text_rect = creator1_text.get_rect(center=(WINDOW_WIDTH/2, 250))
+            screen.blit(creator1_text, text_rect)
+
+            creator2_text = credits_font.render("Ansleme Dupuy", True, (255, 255, 255))
+            text_rect = creator2_text.get_rect(center=(WINDOW_WIDTH/2, 300))
+            screen.blit(creator2_text, text_rect)
+
+            back_text = font.render("Press ESC to return to menu", True, (255, 255, 255))
+            text_rect = back_text.get_rect(center=(WINDOW_WIDTH/2, 500))
+            screen.blit(back_text, text_rect)
+            
 
 
 
