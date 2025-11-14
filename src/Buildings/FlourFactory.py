@@ -10,3 +10,5 @@ class FlourFactory(Buildings):
         self.price = 50
         self.price_multiplicator = 4
         self.bonuses_multiplicator = 3
+        self.cookies_per_second = 1
+        self.cookies_per_second_multiplicator = 1.2

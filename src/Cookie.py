@@ -21,10 +21,19 @@ class Cookie:
         self.cookies_per_click += cookies_per_click
 
     def get_score(self):
-        return self.score
+        return int(self.score)
     
     def get_cookie_per_click(self):
         return self.cookies_per_click
+    
+    def add_cookie_per_seconds(self):
+        self.score += self.cookies_per_second
+
+    def update_cookies_per_seconds(self, cookies_per_second):
+        self.cookies_per_second += cookies_per_second
+
+    def get_cookies_per_second(self):
+        return int(self.cookies_per_second)
 
     def add_1000_to_cookies(self):
         self.score += 1000

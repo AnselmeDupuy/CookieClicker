@@ -10,3 +10,5 @@ class Farm(Buildings):
         self.price = 2500
         self.price_multiplicator = 8
         self.bonuses_multiplicator = 5
+        self.cookies_per_second = 2
+        self.cookies_per_second_multiplicator = 1.5

@@ -104,6 +104,9 @@ buildings.append(farm)
 buildings.append(oven)
 buildings.append(bakery)
 
+last_update = pygame.time.get_ticks()
+cooldown = 1000
+
 while True:
     for event in pygame.event.get():
         # base event:
@@ -114,6 +117,7 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 game_state = "menu"
+                
         # cheat to add 1000 cookie with "y" key, testing purpose
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_y:
@@ -124,18 +128,23 @@ while True:
         if game_state == "menu":
             screen.fill((52,78,91))
             menu.display_menu(screen, buttons)
+
             if load_button.handle_event(event):
                 save.load(cookie, buildings)
                 screen.blit(font.render(f"GAME LOADED!", True, (255, 255, 255)),(((WINDOW_WIDTH / 2) - 100), (10)))
+
             if start_button.handle_event(event):
                 game_state = "playing"
+
             if stop_button.handle_event(event):
                 save.save(cookie, buildings)
                 pygame.quit()
                 sys.exit()
+
             if save_button.handle_event(event):
                 save.save(cookie, buildings)
                 screen.blit(font.render(f"GAME SAVED!", True, (255, 255, 255)),(((WINDOW_WIDTH / 2) - 100), (10)))
+
             if credits_button.handle_event(event):
                 game_state = "credits"
 
@@ -144,6 +153,7 @@ while True:
             screen.fill((52,78,91))
             
             screen.blit(font.render(f"Score: {cookie.get_score()}", True, (255, 255, 255)),(10,10))
+            screen.blit(font.render(f"Cookie per seconds: {cookie.get_cookies_per_second()}",True, (255,255,255)), (10,40))
             screen.blit(font.render(f"Price for {bakery.get_name()}: {bakery.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (64)))
             screen.blit(font.render(f"Price for {farm.get_name()}: {farm.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (192)))
             screen.blit(font.render(f"Price for {oven.get_name()}: {oven.get_price()}", True, (255, 255, 255)),((WINDOW_WIDTH - 384), (320)))
@@ -155,22 +165,38 @@ while True:
             oven_button.draw(screen)
             flour_factory_button.draw(screen)
             option_button.draw(screen)
+
+            current_time = pygame.time.get_ticks()
+            if current_time - last_update >= cooldown:
+                cookie.add_cookie_per_seconds()
+                last_update = current_time
+
             if option_button.handle_event(event):
                 game_state = "menu"
+
             if Bakery_button.handle_event(event):
                 if cookie.get_score() >= bakery.get_price():
                     bakery.buy(cookie)
+                    cookie.update_cookies_per_seconds(bakery.cookies_per_second)
+
             if farm_button.handle_event(event):
                 if cookie.get_score() >= farm.get_price():
                     farm.buy(cookie)
+                    cookie.update_cookies_per_seconds(farm.cookies_per_second)
+
             if oven_button.handle_event(event):
                 if cookie.get_score() >= oven.get_price():
                     oven.buy(cookie)
+                    cookie.update_cookies_per_seconds(oven.cookies_per_second)
+
             if flour_factory_button.handle_event(event):
                 if cookie.get_score() >= flour_factory.get_price():
                     flour_factory.buy(cookie)
+                    cookie.update_cookies_per_seconds(flour_factory.cookies_per_second)
+
             if cookie_button.handle_event(event):
                 cookie.add()
+
         if game_state == "credits":
             screen.fill((52,78,91))
             credits_title_font = pygame.font.Font(None, 74)

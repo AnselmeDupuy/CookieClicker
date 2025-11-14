@@ -10,3 +10,5 @@ class Bakery(Buildings):
         self.price = 25000
         self.price_multiplicator = 12
         self.bonuses_multiplicator = 8
+        self.cookies_per_second = 20
+        self.cookies_per_second_multiplicator = 2

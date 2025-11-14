@@ -10,3 +10,6 @@ class Oven(Buildings):
         self.price = 7800
         self.price_multiplicator = 8
         self.bonuses_multiplicator = 6
+        self.cookies_per_second = 5
+        self.cookies_per_second_multiplicator = 1.8
+        
