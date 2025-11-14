@@ -34,7 +34,6 @@ clock = pygame.time.Clock()
 
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 900
-SPRITESHEET_PATH = "assets/sprite_windmill.png"
 SPRITE_SHEET_WIDTH = 256
 SPRITE_SHEET_HEIGHT = 256
 
@@ -44,7 +43,6 @@ pygame.display.set_caption("Cookie Cliker (pour l'instant)")
 
 # Initialize game objects
 
-stylesheet = Stylesheet(pygame.image.load(SPRITESHEET_PATH))
 
 
 start_button = Button((WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2 ) - 175 , "assets/start_btn.png", 0.8)
@@ -55,19 +53,22 @@ load_button = Button((WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2 ) + 60, "assets/load
 
 stop_button = Button((WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2 ) + 175, "assets/exit_btn.png", 0.8)
 
-cookie_button = Button((WINDOW_WIDTH / 2 - 256), (WINDOW_HEIGHT / 3), SPRITESHEET_PATH)
+cookie_button = Button((WINDOW_WIDTH / 2 - 256), (WINDOW_HEIGHT / 3), "assets/sprite_cookie.png", 0.9)
+
+option_button = Button((WINDOW_WIDTH - 30), (30), "assets/option_btn.png", 0.2)
+
 
 bakery = Bakery()
-Bakery_button = Button((WINDOW_WIDTH - 448), (64), SPRITESHEET_PATH, 0.5)
+Bakery_button = Button((WINDOW_WIDTH - 448), (64), "assets/sprite_bakery.png", 0.3)
 
 farm = Farm()
-farm_button = Button((WINDOW_WIDTH - 448), (192), SPRITESHEET_PATH, 0.5)
+farm_button = Button((WINDOW_WIDTH - 448), (192), "assets/sprite_farm.png", 0.3)
 
 oven = Oven()
-oven_button = Button((WINDOW_WIDTH - 448), (320), SPRITESHEET_PATH, 0.5)
+oven_button = Button((WINDOW_WIDTH - 448), (320), "assets/sprite_oven.png", 0.3)
 
 flour_factory = FlourFactory()
-flour_factory_button = Button((WINDOW_WIDTH - 448), (448), SPRITESHEET_PATH, 0.5)
+flour_factory_button = Button((WINDOW_WIDTH - 448), (448), "assets/sprite_windmill.png", 0.3)
 
 
 
@@ -102,13 +103,21 @@ buildings.append(bakery)
 
 while True:
     for event in pygame.event.get():
+        # base event:
         if event.type == pygame.QUIT:
+            save.save(cookie, buildings)
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 game_state = "menu"
-        # All if while in game menu
+        # cheat to add 1000 cookie with "y" key, testing purpose
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_y:
+                cookie.add_1000_to_cookies()
+                print("added 1000 cookie")
+
+        # while in menu:
         if game_state == "menu":
             screen.fill((52,78,91))
             menu.display_menu(screen, buttons)
@@ -116,10 +125,9 @@ while True:
                 save.load(cookie, buildings)
                 screen.blit(font.render(f"GAME LOADED!", True, (255, 255, 255)),(((WINDOW_WIDTH / 2) - 100), (10)))
             if start_button.handle_event(event):
-                print(f"Start button clicked")
                 game_state = "playing"
             if stop_button.handle_event(event):
-                print(f"Exit button clicked in menu")
+                save.save(cookie, buildings)
                 pygame.quit()
                 sys.exit()
             if save_button.handle_event(event):
@@ -140,6 +148,9 @@ while True:
             farm_button.draw(screen)
             oven_button.draw(screen)
             flour_factory_button.draw(screen)
+            option_button.draw(screen)
+            if option_button.handle_event(event):
+                game_state = "menu"
             if Bakery_button.handle_event(event):
                 if cookie.get_score() >= bakery.get_price():
                     bakery.buy(cookie)
@@ -153,7 +164,6 @@ while True:
                 if cookie.get_score() >= flour_factory.get_price():
                     flour_factory.buy(cookie)
             if cookie_button.handle_event(event):
-                print(f"clicked cookie")
                 cookie.add()
 
 

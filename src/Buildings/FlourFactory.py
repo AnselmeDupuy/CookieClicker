@@ -8,5 +8,5 @@ class FlourFactory(Buildings):
         self.multiplicator = 1.5
         self.bonus_per_click = 4
         self.price = 50
-        self.price_multiplicator = 2.5
-        self.bonuses_multiplicator = 3.4
+        self.price_multiplicator = 4
+        self.bonuses_multiplicator = 3

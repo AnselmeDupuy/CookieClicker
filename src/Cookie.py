@@ -22,3 +22,9 @@ class Cookie:
 
     def get_score(self):
         return self.score
+    
+    def get_cookie_per_click(self):
+        return self.cookies_per_click
+
+    def add_1000_to_cookies(self):
+        self.score += 1000

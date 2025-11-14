@@ -7,6 +7,6 @@ class Oven(Buildings):
         self.name = "Oven"
         self.multiplicator = 4
         self.bonus_per_click = 50
-        self.price = 780
+        self.price = 7800
         self.price_multiplicator = 8
         self.bonuses_multiplicator = 6
